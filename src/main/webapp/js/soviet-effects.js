@@ -177,18 +177,18 @@ function initSovietAnthem() {
     return {
         start: async () => {
             try {
-                console.log('Starting Soviet anthem');
+                console.log('Starting Soviet anthem (instrumental)');
                 
-                // Stream from Wikipedia's public domain Soviet anthem
-                const anthemUrl = 'https://upload.wikimedia.org/wikipedia/commons/f/f6/Hymn_of_the_Soviet_Union_%281977_Vocal%29.ogg';
+                // Stream instrumental Soviet anthem from Wikipedia
+                const anthemUrl = 'https://upload.wikimedia.org/wikipedia/commons/b/b0/Soviet_Union_national_anthem_%28instrumental%29%2C_1977.oga';
                 
                 const audio = new Audio();
                 audio.src = anthemUrl;
                 audio.loop = true;
-                audio.volume = 0.3; // Keep it reasonable
+                audio.volume = 0.25; // Keep it reasonable for auto-play
                 audio.crossOrigin = 'anonymous';
                 
-                // Wait for user interaction before playing
+                // Try to play immediately
                 await audio.play();
                 
                 sovietAnthem.audioElement = audio;
@@ -297,25 +297,24 @@ document.addEventListener('DOMContentLoaded', function() {
         anthemControl.style.right = isMobileNow ? '10px' : '20px';
     });
     
-    // Auto-start anthem only after user interaction (safer for browsers)
-    let hasUserInteracted = false;
-    
-    const enableAutoStart = () => {
-        if (!hasUserInteracted) {
-            hasUserInteracted = true;
-            // Wait a bit after first interaction, then start anthem
-            setTimeout(() => {
+    // Auto-start anthem immediately on page load
+    setTimeout(() => {
+        toggleAnthem().catch(() => {
+            console.log('Auto-start blocked by browser - trying after user interaction');
+            
+            // Fallback: wait for any user interaction
+            const enableAutoStart = () => {
                 if (!anthemEnabled) {
                     toggleAnthem().catch(() => {
-                        console.log('Auto-start failed - user interaction required');
+                        console.log('Auto-start failed - user needs to manually enable');
                     });
                 }
-            }, 1000);
-        }
-    };
-    
-    // Listen for any user interaction
-    document.addEventListener('click', enableAutoStart, { once: true });
-    document.addEventListener('keydown', enableAutoStart, { once: true });
-    document.addEventListener('touchstart', enableAutoStart, { once: true });
+            };
+            
+            // Listen for any user interaction
+            document.addEventListener('click', enableAutoStart, { once: true });
+            document.addEventListener('keydown', enableAutoStart, { once: true });
+            document.addEventListener('touchstart', enableAutoStart, { once: true });
+        });
+    }, 500); // Small delay to let page fully load
 });
