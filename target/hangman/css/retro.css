@@ -1,0 +1,675 @@
+/* ULTIMATE 90s STYLING */
+
+* {
+    cursor: auto;
+    box-sizing: border-box;
+    touch-action: manipulation; /* Disable double-tap zoom */
+}
+
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Soviet hammer cursor for interactive elements */
+button, input, a, .clickable {
+    cursor: pointer;
+}
+
+/* Special cursor for the game area */
+.game-area {
+    cursor: crosshair;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Ruslan+Display&family=Creepster&family=Changa+One&display=swap');
+
+body {
+    background: linear-gradient(45deg, #CC0000 25%, #FFD700 25%, #FFD700 50%, #CC0000 50%, #CC0000 75%, #FFD700 75%), 
+                repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(255, 215, 0, 0.3) 20px, rgba(255, 215, 0, 0.3) 40px);
+    background-size: 80px 80px, 100% 100%;
+    background-color: #CC0000;
+    background-attachment: fixed;
+    font-family: "Ruslan Display", "Changa One", "Arial Black", serif;
+    color: #FFD700;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+    font-size: 18px;
+    min-width: 320px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@keyframes rainbow {
+    0% { color: red; }
+    14% { color: orange; }
+    28% { color: yellow; }
+    42% { color: green; }
+    57% { color: blue; }
+    71% { color: indigo; }
+    85% { color: violet; }
+    100% { color: red; }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.container {
+    background: linear-gradient(45deg, #FF00FF, #00FFFF, #FFFF00, #FF00FF);
+    border: 10px ridge #FFD700;
+    border-radius: 0;
+    box-shadow: 10px 10px 0px #000000;
+    padding: 40px;
+    max-width: 1200px;
+    min-height: 800px;
+    margin: 0 auto;
+    position: relative;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+.container::before,
+.container::after {
+    content: "☭";
+    position: absolute;
+    font-size: 60px;
+    color: #FFD700;
+    text-shadow: 2px 2px 0px #CC0000;
+    animation: spin 3s linear infinite;
+}
+
+.container::before {
+    top: -40px;
+    left: -40px;
+}
+
+.container::after {
+    bottom: -40px;
+    right: -40px;
+}
+
+h1 {
+    font-size: 48px;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 3px 3px 0px #FF00FF, 6px 6px 0px #00FFFF;
+    animation: rainbow 3s linear infinite;
+    font-family: "Impact", "Arial Black", sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.under-construction {
+    background: #FFFF00;
+    color: #000;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    animation: blink 1s infinite;
+    margin-bottom: 20px;
+    border: 3px dashed #FF0000;
+}
+
+.visitor-counter {
+    background: #000;
+    color: #00FF00;
+    padding: 10px;
+    text-align: center;
+    font-family: "Courier New", monospace;
+    border: 2px solid #00FF00;
+    margin-bottom: 20px;
+}
+
+.marquee-container {
+    background: #000080;
+    color: #FFFF00;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 3px solid #FFD700;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee {
+    display: inline-block;
+    animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+}
+
+.game-area {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.hangman-container {
+    background: #000;
+    border: 5px solid #00FF00;
+    padding: 20px;
+    box-shadow: 0 0 20px #00FF00;
+}
+
+#hangman {
+    width: 350px;
+    height: 400px;
+}
+
+#hangman {
+    filter: drop-shadow(0 0 10px #00FF00);
+}
+
+#hangman line,
+#hangman circle {
+    stroke: #00FF00;
+    filter: drop-shadow(0 0 5px #00FF00);
+}
+
+.game-info {
+    background: rgba(0, 0, 0, 0.8);
+    border: 3px solid #FF00FF;
+    padding: 30px;
+    color: #00FF00;
+    text-shadow: 0 0 10px #00FF00;
+    max-width: 500px;
+    min-width: 400px;
+    font-size: 20px;
+}
+
+.word-display {
+    font-size: 48px;
+    color: #FFFF00;
+    text-shadow: 2px 2px 0px #FF00FF, -2px -2px 0px #00FFFF;
+    animation: pulse 2s ease-in-out infinite;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 0.3em;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.guess-info {
+    background: linear-gradient(to right, #FF00FF, #00FFFF);
+    border: 3px ridge #FFD700;
+    color: #000;
+    font-weight: bold;
+}
+
+#guessInput {
+    background: #000;
+    color: #00FF00;
+    border: 3px solid #00FF00;
+    font-family: "Courier New", monospace;
+    font-size: 18px;
+    text-shadow: 0 0 5px #00FF00;
+}
+
+#guessInput:focus {
+    outline: none;
+    box-shadow: 0 0 20px #00FF00;
+}
+
+button {
+    background: linear-gradient(to bottom, #FFD700, #FFA500);
+    color: #000;
+    border: 3px outset #FFD700;
+    font-family: "Arial Black", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-shadow: 1px 1px 0px #FFF;
+}
+
+button:hover {
+    background: linear-gradient(to bottom, #FFA500, #FFD700);
+}
+
+button:active {
+    border-style: inset;
+}
+
+.message {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    animation: blink 0.5s 3;
+}
+
+.message.success {
+    background: #00FF00;
+    color: #000;
+    border: 5px double #000;
+}
+
+.message.error {
+    background: #FF0000;
+    color: #FFFF00;
+    border: 5px double #FFFF00;
+}
+
+.message.info {
+    background: #0000FF;
+    color: #FFFFFF;
+    border: 5px double #FFFFFF;
+}
+
+.loading-gif {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background: #000;
+    padding: 20px;
+    border: 5px solid #00FF00;
+    display: none;
+}
+
+.flames {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    background: url('data:image/gif;base64,R0lGODlhAQAYAPcAAP8AAP8ICP8QEP8YGP8gIP8oKP8wMP84OP9AQP9ISP9QUP9YWP9gYP9oaP9wcP94eP+AgP+IiP+QkP+YmP+goP+oqP+wsP+4uP/AwP/IyP/Q0P/Y2P/g4P/o6P/w8P/4+P8A+P8A8P8A6P8A4P8A2P8A0P8AyP8AwP8AuP8AsP8AqP8AoP8AmP8AkP8AiP8AgP8AeP8AcP8AaP8AYP8AWP8AUP8ASP8AQP8AOP8AMP8AKP8AIP8AGP8AEP8ACP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQEBwAAACwAAAAAAQAYAAAIDQABCBxIsKDBgwgDAgAh+QQEBwAAACwAAAAAAQAYAAAIDQABCBxIsKDBgwgDAgA7') repeat-x;
+    bottom: 0;
+    left: 0;
+}
+
+.sparkles {
+    position: fixed;
+    pointer-events: none;
+}
+
+.sparkle {
+    position: absolute;
+    font-size: 20px;
+    animation: sparkle 1s ease-out forwards;
+}
+
+@keyframes sparkle {
+    to {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Soviet-specific styles */
+.stripper-corner {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: linear-gradient(45deg, #FF1493, #8B008B, #FF69B4);
+    border: 5px double #FFD700;
+    padding: 15px;
+    border-radius: 15px;
+    animation: seductive-bounce 2s infinite;
+    box-shadow: 0 0 30px #FF1493, inset 0 0 20px rgba(255, 20, 147, 0.3);
+    width: 200px;
+    text-align: center;
+}
+
+.playboy-frame {
+    background: linear-gradient(45deg, #000, #333);
+    border: 3px solid #FFD700;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.stripper-gif {
+    font-size: 60px;
+    animation: sultry-dance 1.5s infinite alternate;
+    display: block;
+    transform-origin: center bottom;
+}
+
+.neon-hearts {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    animation: hearts-pulse 1s infinite;
+    font-size: 20px;
+}
+
+.stripper-text {
+    color: #FFD700;
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0px #FF1493;
+    margin: 5px 0;
+    animation: neon-glow 2s infinite alternate;
+}
+
+.playboy-text {
+    color: #FF69B4;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0px #8B008B;
+    margin: 3px 0;
+}
+
+.adult-warning {
+    color: #FF0000;
+    font-size: 10px;
+    font-weight: bold;
+    animation: blink 1s infinite;
+    background: #FFFF00;
+    padding: 2px;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+
+@keyframes sultry-dance {
+    0% { transform: translateX(-8px) rotate(-10deg) scale(1); }
+    50% { transform: translateY(-5px) rotate(5deg) scale(1.1); }
+    100% { transform: translateX(8px) rotate(10deg) scale(1); }
+}
+
+@keyframes seductive-bounce {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    25% { transform: translateY(-8px) rotate(1deg); }
+    50% { transform: translateY(-12px) rotate(2deg); }
+    75% { transform: translateY(-8px) rotate(-1deg); }
+}
+
+@keyframes hearts-pulse {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.3) rotate(180deg); }
+}
+
+@keyframes neon-glow {
+    0% { text-shadow: 2px 2px 0px #FF1493, 0 0 10px #FF1493; }
+    100% { text-shadow: 2px 2px 0px #FF1493, 0 0 20px #FF1493, 0 0 30px #FF69B4; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.soviet-flag {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 60px;
+    animation: wave 3s ease-in-out infinite;
+    z-index: 1000;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+}
+
+@keyframes load-bar {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+/* Enhanced Soviet styling */
+.container {
+    background: linear-gradient(135deg, #CC0000, #8B0000, #CC0000);
+    border: 8px double #FFD700;
+    box-shadow: 0 0 30px #FFD700, inset 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+h1 {
+    background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 0px #CC0000, 4px 4px 0px #8B0000;
+}
+
+.under-construction {
+    background: linear-gradient(45deg, #FFFF00, #FFA500);
+    color: #CC0000;
+    border: 5px solid #CC0000;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.visitor-counter {
+    background: linear-gradient(to right, #000, #330000, #000);
+    color: #00FF00;
+    border: 3px solid #00FF00;
+    font-family: "Courier New", monospace;
+    text-shadow: 0 0 10px #00FF00;
+}
+
+.marquee-container {
+    background: linear-gradient(to right, #CC0000, #8B0000, #CC0000);
+    color: #FFD700;
+    border: 4px solid #FFD700;
+    text-shadow: 2px 2px 0px #CC0000;
+}
+
+/* Dialup simulation */
+.image-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 0%, #000 100%);
+    animation: dialup-load 3s linear forwards;
+}
+
+@keyframes dialup-load {
+    from { height: 100%; }
+    to { height: 0%; }
+}
+
+/* Mobile Responsive Design - 90s Style */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 16px;
+        background-attachment: scroll; /* Fix mobile background */
+    }
+    
+    .container {
+        padding: 20px;
+        min-height: auto;
+        max-width: 100%;
+        width: calc(100% - 20px);
+        margin: 0;
+        border-width: 5px; /* Smaller borders on mobile */
+        overflow-x: hidden;
+    }
+    
+    h1 {
+        font-size: 32px;
+        margin: 10px 0;
+        letter-spacing: 1px;
+    }
+    
+    .game-area {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        margin-top: 20px;
+    }
+    
+    .hangman-container {
+        padding: 15px;
+        order: 1;
+    }
+    
+    #hangman {
+        width: 280px;
+        height: 320px;
+    }
+    
+    .game-info {
+        padding: 20px;
+        min-width: auto;
+        max-width: 100%;
+        font-size: 18px;
+        order: 2;
+    }
+    
+    .word-display {
+        font-size: 36px;
+        margin-bottom: 20px;
+        letter-spacing: 0.2em;
+    }
+    
+    .input-area {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    #guessInput {
+        width: 100%;
+        max-width: 280px;
+        padding: 12px;
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    button {
+        width: 100%;
+        max-width: 280px;
+        padding: 12px 20px;
+        font-size: 16px;
+        margin: 5px 0;
+    }
+    
+    .stripper-corner {
+        display: none; /* Hide on mobile */
+    }
+    
+    .soviet-flag {
+        top: 10px;
+        left: 10px;
+        font-size: 40px;
+    }
+    
+    .under-construction {
+        font-size: 14px;
+        padding: 8px;
+    }
+    
+    .visitor-counter {
+        font-size: 14px;
+        padding: 8px;
+    }
+    
+    .marquee-container {
+        font-size: 14px;
+        padding: 8px;
+    }
+    
+    /* Make anthem control mobile-friendly */
+    .anthem-control-mobile {
+        top: 10px;
+        right: 10px;
+        padding: 8px;
+        font-size: 12px;
+        width: 140px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding: 5px;
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 28px;
+        letter-spacing: 0.5px;
+    }
+    
+    .hangman-container {
+        padding: 10px;
+    }
+    
+    #hangman {
+        width: 240px;
+        height: 280px;
+    }
+    
+    .game-info {
+        padding: 15px;
+        font-size: 16px;
+    }
+    
+    .word-display {
+        font-size: 28px;
+        letter-spacing: 0.15em;
+    }
+    
+    #guessInput {
+        max-width: 240px;
+        padding: 10px;
+    }
+    
+    button {
+        max-width: 240px;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .stripper-corner {
+        display: none; /* Hide on mobile */
+    }
+    
+    .soviet-flag {
+        font-size: 30px;
+    }
+    
+    .under-construction {
+        font-size: 12px;
+        padding: 6px;
+    }
+    
+    .visitor-counter {
+        font-size: 12px;
+        padding: 6px;
+    }
+    
+    .marquee-container {
+        font-size: 12px;
+        padding: 6px;
+    }
+    
+    .anthem-control-mobile {
+        width: 100px;
+        padding: 6px;
+        font-size: 10px;
+    }
+}

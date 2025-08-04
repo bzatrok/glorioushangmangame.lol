@@ -113,6 +113,11 @@ public class GameServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         
+        // Prevent caching of game API responses
+        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        resp.setHeader("Pragma", "no-cache");
+        resp.setHeader("Expires", "0");
+        
         PrintWriter out = resp.getWriter();
         out.print(gson.toJson(data));
         out.flush();

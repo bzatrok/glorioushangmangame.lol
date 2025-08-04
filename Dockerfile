@@ -44,5 +44,5 @@ EXPOSE 7583
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:7583/ || exit 1
 
-# Run the application
-CMD ["java", "-jar", "jetty-runner.jar", "--port", "7583", "hangman.war"]
+# Run the application with optimized JVM settings
+CMD ["java", "-Xms256m", "-Xmx512m", "-XX:+UseG1GC", "-XX:+UseStringDeduplication", "-Djava.awt.headless=true", "-jar", "jetty-runner.jar", "--port", "7583", "hangman.war"]

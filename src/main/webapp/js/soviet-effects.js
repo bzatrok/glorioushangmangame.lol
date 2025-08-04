@@ -16,11 +16,12 @@ let currentVisitorCount = 1337;
 let isCounterInitialized = false;
 
 function initVisitorCounter() {
-    // Get visitor count from server
-    fetch('/api/visitors', {
+    // Get visitor count from server with cache busting
+    fetch('/api/visitors?t=' + Date.now(), {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
         }
     })
     .then(response => response.json())
@@ -42,7 +43,11 @@ function initVisitorCounter() {
 }
 
 function fetchVisitorCount() {
-    fetch('/api/visitors')
+    fetch('/api/visitors?t=' + Date.now(), {
+        headers: {
+            'Cache-Control': 'no-cache'
+        }
+    })
     .then(response => response.json())
     .then(data => {
         currentVisitorCount = data.count || currentVisitorCount;

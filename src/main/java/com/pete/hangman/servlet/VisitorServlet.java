@@ -47,6 +47,11 @@ public class VisitorServlet extends HttpServlet {
         resp.setHeader("Access-Control-Allow-Methods", "GET, POST");
         resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
         
+        // Prevent caching
+        resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        resp.setHeader("Pragma", "no-cache");
+        resp.setHeader("Expires", "0");
+        
         PrintWriter out = resp.getWriter();
         out.print(gson.toJson(data));
         out.flush();
