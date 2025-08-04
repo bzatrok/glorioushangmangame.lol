@@ -79,11 +79,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add random Soviet quotes
 const sovietQuotes = [
-    "В СОВЕТСКОЙ РОССИИ, ПИВО ПЬЁТ ТЕБЯ!",
-    "ТОВАРИЩ, ЭТО ИГРА ДЛЯ ВСЕХ РАБОЧИХ!",
-    "КАПИТАЛИСТИЧЕСКИЕ БУКВЫ НЕ ПРОЙДУТ!",
-    "СЛАВА СОВЕТСКОЙ ВИСЕЛИЦЕ!",
-    "ВОДКА ПОМОГАЕТ УГАДЫВАТЬ ЛУЧШЕ!"
+    "IN SOVIET RUSSIA, BEER DRINKS YOU!",
+    "COMRADE, THIS GAME FOR ALL WORKERS!",
+    "CAPITALIST LETTERS SHALL NOT PASS!",
+    "GLORY TO SOVIET HANGMAN!",
+    "VODKA HELPS GUESS BETTER!"
 ];
 
 function showRandomSovietQuote() {
@@ -168,3 +168,154 @@ function createFloatingSymbol() {
 
 // Create floating symbols every 5 seconds
 setInterval(createFloatingSymbol, 5000);
+
+// Soviet Anthem Background Music
+let sovietAnthem = null;
+let anthemEnabled = false;
+
+function initSovietAnthem() {
+    return {
+        start: async () => {
+            try {
+                console.log('Starting Soviet anthem');
+                
+                // Stream from Wikipedia's public domain Soviet anthem
+                const anthemUrl = 'https://upload.wikimedia.org/wikipedia/commons/f/f6/Hymn_of_the_Soviet_Union_%281977_Vocal%29.ogg';
+                
+                const audio = new Audio();
+                audio.src = anthemUrl;
+                audio.loop = true;
+                audio.volume = 0.3; // Keep it reasonable
+                audio.crossOrigin = 'anonymous';
+                
+                // Wait for user interaction before playing
+                await audio.play();
+                
+                sovietAnthem.audioElement = audio;
+                anthemEnabled = true;
+                
+                console.log('Soviet anthem started successfully');
+                return true;
+            } catch (error) {
+                console.log('Failed to start Soviet anthem:', error);
+                anthemEnabled = false;
+                throw error;
+            }
+        },
+        stop: () => {
+            console.log('Stopping Soviet anthem');
+            if (sovietAnthem.audioElement) {
+                sovietAnthem.audioElement.pause();
+                sovietAnthem.audioElement.currentTime = 0;
+                sovietAnthem.audioElement = null;
+            }
+            anthemEnabled = false;
+        },
+        isPlaying: () => {
+            return anthemEnabled && sovietAnthem.audioElement && !sovietAnthem.audioElement.paused;
+        },
+        audioElement: null
+    };
+}
+
+// Start Soviet anthem when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Add anthem control button with mobile-responsive styling
+    const anthemControl = document.createElement('div');
+    anthemControl.id = 'anthem-control';
+    
+    // Check if mobile device
+    const isMobile = window.innerWidth <= 768;
+    
+    anthemControl.style.cssText = `
+        position: fixed;
+        top: ${isMobile ? '10px' : '20px'};
+        right: ${isMobile ? '10px' : '20px'};
+        z-index: 10000;
+        background: #CC0000;
+        border: 3px solid #FFD700;
+        padding: ${isMobile ? '8px' : '10px'};
+        border-radius: 5px;
+        color: #FFD700;
+        font-family: "Ruslan Display", "Changa One", "Arial Black", serif;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: ${isMobile ? '12px' : '14px'};
+        text-align: center;
+        text-shadow: 2px 2px 0px #000000;
+        letter-spacing: 1px;
+        width: ${isMobile ? '120px' : '160px'};
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    `;
+    anthemControl.innerHTML = `
+        ☭ SOVIET ANTHEM ☭<br>
+        <span id="anthem-status">OFF</span>
+    `;
+    
+    document.body.appendChild(anthemControl);
+    
+    // Initialize anthem
+    sovietAnthem = initSovietAnthem();
+    
+    // Add click/touch handler for anthem control
+    const toggleAnthem = async () => {
+        const statusSpan = document.getElementById('anthem-status');
+        
+        if (anthemEnabled && sovietAnthem.isPlaying()) {
+            sovietAnthem.stop();
+            statusSpan.textContent = 'OFF';
+            anthemControl.style.background = '#CC0000';
+        } else {
+            try {
+                await sovietAnthem.start();
+                statusSpan.textContent = 'ON';
+                anthemControl.style.background = '#008000';
+            } catch (error) {
+                console.log('Failed to start anthem:', error);
+                statusSpan.textContent = 'BLOCKED';
+                anthemControl.style.background = '#FF6600';
+            }
+        }
+    };
+    
+    // Add both click and touch events for mobile compatibility
+    anthemControl.addEventListener('click', toggleAnthem);
+    anthemControl.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        toggleAnthem();
+    });
+    
+    // Handle window resize for responsive control
+    window.addEventListener('resize', () => {
+        const isMobileNow = window.innerWidth <= 768;
+        anthemControl.style.fontSize = isMobileNow ? '12px' : '14px';
+        anthemControl.style.padding = isMobileNow ? '8px' : '10px';
+        anthemControl.style.width = isMobileNow ? '120px' : '160px';
+        anthemControl.style.top = isMobileNow ? '10px' : '20px';
+        anthemControl.style.right = isMobileNow ? '10px' : '20px';
+    });
+    
+    // Auto-start anthem only after user interaction (safer for browsers)
+    let hasUserInteracted = false;
+    
+    const enableAutoStart = () => {
+        if (!hasUserInteracted) {
+            hasUserInteracted = true;
+            // Wait a bit after first interaction, then start anthem
+            setTimeout(() => {
+                if (!anthemEnabled) {
+                    toggleAnthem().catch(() => {
+                        console.log('Auto-start failed - user interaction required');
+                    });
+                }
+            }, 1000);
+        }
+    };
+    
+    // Listen for any user interaction
+    document.addEventListener('click', enableAutoStart, { once: true });
+    document.addEventListener('keydown', enableAutoStart, { once: true });
+    document.addEventListener('touchstart', enableAutoStart, { once: true });
+});

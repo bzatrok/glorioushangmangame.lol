@@ -3,41 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ПЁТР'S ПИВО ВИСЕЛИЦА GAME - СОВЕТСКИЙ СТИЛЬ</title>
+    <title>PETE'S BEER HANGMAN GAME - SOVIET STYLE</title>
     <link rel="stylesheet" href="css/retro.css">
+    
+    <!-- 100% privacy-first analytics -->
+    <script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+    <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif?collect-dnt=true" alt="" referrerpolicy="no-referrer-when-downgrade"/></noscript>
 </head>
 <body>
     <!-- Soviet Loading Screen -->
     <div id="soviet-loader" class="loading-gif">
         <div style="color: #FF0000; font-size: 24px; text-align: center;">
-            ☭ ЗАГРУЗКА ТОВАРИЩ... ☭<br>
+            ☭ LOADING COMRADE... ☭<br>
             <div style="background: #FF0000; height: 20px; width: 0%; animation: load-bar 3s linear forwards;"></div>
         </div>
     </div>
     
     <!-- Under Construction Banner -->
     <div class="under-construction">
-        🚧 ПОД СТРОИТЕЛЬСТВОМ ТОВАРИЩ! РАБОТАЕТ В КАПИТАЛИСТИЧЕСКИЙ БРАУЗЕР! 🚧
+        🚧 UNDER CONSTRUCTION COMRADE! WORKS IN CAPITALIST BROWSER! 🚧
     </div>
     
     <!-- Visitor Counter -->
     <div class="visitor-counter">
-        ТОВАРИЩИ ПОСЕТИЛИ: <span id="visitorCount">00001337</span> 
-        ☭ СЛАВА СОВЕТСКОМУ СОЮЗУ! ☭
+        COMRADES VISITED: <span id="visitorCount">00001337</span> 
+        ☭ GLORY TO SOVIET UNION! ☭
     </div>
     
     <!-- Scrolling Marquee -->
     <div class="marquee-container">
         <div class="marquee">
-            ☭ ДОБРО ПОЖАЛОВАТЬ В СОВЕТСКАЯ ВИСЕЛИЦА ТОВАРИЩ! ☭ 
-            ИГРАТЬ В ПИВО ИГРА ДЛЯ СЛАВЫ РОДИНЫ! ☭ 
-            НЕТ КАПИТАЛИЗМ ЗДЕСЬ! ☭ 
-            ТОЛЬКО ВОДКА И КОММУНИЗМ! ☭
+            ☭ WELCOME TO SOVIET HANGMAN COMRADE! ☭ 
+            PLAY BEER GAME FOR GLORY OF MOTHERLAND! ☭ 
+            NO CAPITALISM HERE! ☭ 
+            ONLY VODKA AND COMMUNISM! ☭
         </div>
     </div>
     
     <div class="container">
-        <h1>☭ ПИВО ВИСЕЛИЦА ТОВАРИЩ ☭</h1>
+        <h1>☭ BEER HANGMAN COMRADE ☭</h1>
         
         <div class="game-area">
             <div class="hangman-container">
@@ -73,15 +77,15 @@
                 <div class="word-display" id="wordDisplay"></div>
                 
                 <div class="guess-info">
-                    <p>☭ НЕПРАВИЛЬНЫЕ ПОПЫТКИ: <span id="wrongCount">0</span>/6 ☭</p>
-                    <p>☭ БУКВЫ ТОВАРИЩА: <span id="guessedLetters"></span></p>
-                    <p>☭ СЛОВА ТОВАРИЩА: <span id="guessedWords"></span></p>
+                    <p>☭ WRONG ATTEMPTS: <span id="wrongCount">0</span>/6 ☭</p>
+                    <p>☭ COMRADE'S LETTERS: <span id="guessedLetters"></span></p>
+                    <p>☭ COMRADE'S WORDS: <span id="guessedWords"></span></p>
                 </div>
                 
                 <div class="input-area">
-                    <input type="text" id="guessInput" placeholder="БУКВА ИЛИ СЛОВО ТОВАРИЩ" maxlength="20">
-                    <button id="guessButton" onclick="makeGuess()">☭ УГАДАТЬ ☭</button>
-                    <button id="newGameButton" onclick="newGame()">☭ НОВАЯ ИГРА ☭</button>
+                    <input type="text" id="guessInput" placeholder="LETTER OR WORD COMRADE" maxlength="20">
+                    <button id="guessButton" onclick="makeGuess()">☭ GUESS ☭</button>
+                    <button id="newGameButton" onclick="newGame()">☭ NEW GAME ☭</button>
                 </div>
                 
                 <div id="message" class="message"></div>
@@ -95,9 +99,9 @@
             <div class="stripper-gif">💃</div>
             <div class="neon-hearts">💖✨💖</div>
         </div>
-        <div class="stripper-text">🔥 ГОРЯЧАЯ ТОВАРИЩКА 🔥</div>
-        <div class="playboy-text">☭ СОВЕТСКИЙ PLAYBOY ☭</div>
-        <div class="adult-warning">⚠️ 18+ ТОЛЬКО ДЛЯ ВЗРОСЛЫХ ⚠️</div>
+        <div class="stripper-text">🔥 HOT COMRADE GIRL 🔥</div>
+        <div class="playboy-text">☭ SOVIET PLAYBOY ☭</div>
+        <div class="adult-warning">⚠️ 18+ ADULTS ONLY ⚠️</div>
     </div>
     
     <!-- Soviet Flag Corner -->

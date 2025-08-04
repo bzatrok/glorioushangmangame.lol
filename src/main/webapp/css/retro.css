@@ -2,6 +2,12 @@
 
 * {
     cursor: auto;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* Soviet hammer cursor for interactive elements */
@@ -21,6 +27,7 @@ body {
                 repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(255, 215, 0, 0.3) 20px, rgba(255, 215, 0, 0.3) 40px);
     background-size: 80px 80px, 100% 100%;
     background-color: #CC0000;
+    background-attachment: fixed;
     font-family: "Ruslan Display", "Changa One", "Arial Black", serif;
     color: #FFD700;
     margin: 0;
@@ -28,6 +35,9 @@ body {
     overflow-x: hidden;
     position: relative;
     font-size: 18px;
+    min-width: 320px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 @keyframes rainbow {
@@ -61,6 +71,9 @@ body {
     min-height: 800px;
     margin: 0 auto;
     position: relative;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
+    overflow-x: auto;
 }
 
 .container::before,
@@ -470,4 +483,230 @@ h1 {
 @keyframes dialup-load {
     from { height: 100%; }
     to { height: 0%; }
+}
+
+/* Mobile Responsive Design - 90s Style */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 16px;
+        background-attachment: scroll; /* Fix mobile background */
+    }
+    
+    .container {
+        padding: 20px;
+        min-height: auto;
+        max-width: 100%;
+        width: calc(100% - 20px);
+        margin: 0;
+        border-width: 5px; /* Smaller borders on mobile */
+        overflow-x: hidden;
+    }
+    
+    h1 {
+        font-size: 32px;
+        margin: 10px 0;
+        letter-spacing: 1px;
+    }
+    
+    .game-area {
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        margin-top: 20px;
+    }
+    
+    .hangman-container {
+        padding: 15px;
+        order: 1;
+    }
+    
+    #hangman {
+        width: 280px;
+        height: 320px;
+    }
+    
+    .game-info {
+        padding: 20px;
+        min-width: auto;
+        max-width: 100%;
+        font-size: 18px;
+        order: 2;
+    }
+    
+    .word-display {
+        font-size: 36px;
+        margin-bottom: 20px;
+        letter-spacing: 0.2em;
+    }
+    
+    .input-area {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    #guessInput {
+        width: 100%;
+        max-width: 280px;
+        padding: 12px;
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    button {
+        width: 100%;
+        max-width: 280px;
+        padding: 12px 20px;
+        font-size: 16px;
+        margin: 5px 0;
+    }
+    
+    .stripper-corner {
+        bottom: 10px;
+        right: 10px;
+        width: 160px;
+        padding: 10px;
+    }
+    
+    .stripper-gif {
+        font-size: 40px;
+    }
+    
+    .stripper-text {
+        font-size: 12px;
+    }
+    
+    .playboy-text {
+        font-size: 10px;
+    }
+    
+    .adult-warning {
+        font-size: 8px;
+    }
+    
+    .soviet-flag {
+        top: 10px;
+        left: 10px;
+        font-size: 40px;
+    }
+    
+    .under-construction {
+        font-size: 14px;
+        padding: 8px;
+    }
+    
+    .visitor-counter {
+        font-size: 14px;
+        padding: 8px;
+    }
+    
+    .marquee-container {
+        font-size: 14px;
+        padding: 8px;
+    }
+    
+    /* Make anthem control mobile-friendly */
+    .anthem-control-mobile {
+        top: 10px;
+        right: 10px;
+        padding: 8px;
+        font-size: 12px;
+        width: 140px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        padding: 5px;
+        font-size: 14px;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+    
+    h1 {
+        font-size: 28px;
+        letter-spacing: 0.5px;
+    }
+    
+    .hangman-container {
+        padding: 10px;
+    }
+    
+    #hangman {
+        width: 240px;
+        height: 280px;
+    }
+    
+    .game-info {
+        padding: 15px;
+        font-size: 16px;
+    }
+    
+    .word-display {
+        font-size: 28px;
+        letter-spacing: 0.15em;
+    }
+    
+    #guessInput {
+        max-width: 240px;
+        padding: 10px;
+    }
+    
+    button {
+        max-width: 240px;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .stripper-corner {
+        width: 120px;
+        padding: 8px;
+        bottom: 5px;
+        right: 5px;
+    }
+    
+    .stripper-gif {
+        font-size: 30px;
+    }
+    
+    .stripper-text {
+        font-size: 10px;
+    }
+    
+    .playboy-text {
+        font-size: 8px;
+    }
+    
+    .adult-warning {
+        font-size: 7px;
+    }
+    
+    .soviet-flag {
+        font-size: 30px;
+    }
+    
+    .under-construction {
+        font-size: 12px;
+        padding: 6px;
+    }
+    
+    .visitor-counter {
+        font-size: 12px;
+        padding: 6px;
+    }
+    
+    .marquee-container {
+        font-size: 12px;
+        padding: 6px;
+    }
+    
+    .anthem-control-mobile {
+        width: 100px;
+        padding: 6px;
+        font-size: 10px;
+    }
 }
