@@ -2,3 +2,4 @@
 /Users/bzatrok/play/Pete.Hangman/src/main/java/com/pete/hangman/model/GameState.java
 /Users/bzatrok/play/Pete.Hangman/src/main/java/com/pete/hangman/model/HangmanGame.java
 /Users/bzatrok/play/Pete.Hangman/src/main/java/com/pete/hangman/servlet/GameServlet.java
+/Users/bzatrok/play/Pete.Hangman/src/main/java/com/pete/hangman/servlet/VisitorServlet.java

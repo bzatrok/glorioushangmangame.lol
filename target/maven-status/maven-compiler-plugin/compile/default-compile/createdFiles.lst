@@ -1,3 +1,4 @@
+com/pete/hangman/servlet/VisitorServlet.class
 com/pete/hangman/servlet/GameServlet.class
 com/pete/hangman/model/HangmanGame.class
 com/pete/hangman/model/BeerWords.class

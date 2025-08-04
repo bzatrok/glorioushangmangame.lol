@@ -11,15 +11,67 @@ window.addEventListener('load', function() {
     }, 3000);
 });
 
-// Visitor counter with Soviet flair
-let visitorCount = 1337;
-function updateVisitorCounter() {
-    visitorCount += Math.floor(Math.random() * 3) + 1;
-    document.getElementById('visitorCount').textContent = visitorCount.toString().padStart(8, '0');
+// Live visitor counter with Soviet flair
+let currentVisitorCount = 1337;
+let isCounterInitialized = false;
+
+function initVisitorCounter() {
+    // Get visitor count from server with cache busting
+    fetch('/api/visitors?t=' + Date.now(), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        currentVisitorCount = data.count || 1337;
+        updateVisitorCounterDisplay();
+        isCounterInitialized = true;
+        
+        // Start periodic updates from server
+        setInterval(fetchVisitorCount, 10000); // Every 10 seconds
+    })
+    .catch(error => {
+        console.log('Visitor counter fallback mode');
+        // Fallback to fake counter if server unavailable
+        currentVisitorCount = 1337 + Math.floor(Math.random() * 1000);
+        updateVisitorCounterDisplay();
+        setInterval(updateFakeVisitorCounter, 8000);
+    });
 }
 
-// Update visitor count every 5 seconds
-setInterval(updateVisitorCounter, 5000);
+function fetchVisitorCount() {
+    fetch('/api/visitors?t=' + Date.now(), {
+        headers: {
+            'Cache-Control': 'no-cache'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        currentVisitorCount = data.count || currentVisitorCount;
+        updateVisitorCounterDisplay();
+    })
+    .catch(error => {
+        // Silently fail, keep current count
+    });
+}
+
+function updateFakeVisitorCounter() {
+    currentVisitorCount += Math.floor(Math.random() * 3) + 1;
+    updateVisitorCounterDisplay();
+}
+
+function updateVisitorCounterDisplay() {
+    const visitorElement = document.getElementById('visitorCount');
+    if (visitorElement) {
+        visitorElement.textContent = currentVisitorCount.toString().padStart(8, '0');
+    }
+}
+
+// Initialize visitor counter when page loads
+document.addEventListener('DOMContentLoaded', initVisitorCounter);
 
 // Sparkles effect when clicking
 document.addEventListener('click', function(e) {
