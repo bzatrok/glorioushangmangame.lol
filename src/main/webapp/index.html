@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pete's Beer Hangman Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Beer Type Hangman</h1>
+        
+        <div class="game-area">
+            <div class="hangman-container">
+                <svg id="hangman" width="250" height="300" viewBox="0 0 250 300">
+                    <!-- Gallows -->
+                    <line x1="10" y1="290" x2="140" y2="290" stroke="black" stroke-width="4"/>
+                    <line x1="50" y1="290" x2="50" y2="20" stroke="black" stroke-width="4"/>
+                    <line x1="50" y1="20" x2="150" y2="20" stroke="black" stroke-width="4"/>
+                    <line x1="150" y1="20" x2="150" y2="50" stroke="black" stroke-width="3"/>
+                    
+                    <!-- Body parts (initially hidden) -->
+                    <!-- Head -->
+                    <circle id="head" cx="150" cy="70" r="20" stroke="black" stroke-width="3" fill="none" style="display: none;"/>
+                    
+                    <!-- Body -->
+                    <line id="body" x1="150" y1="90" x2="150" y2="150" stroke="black" stroke-width="3" style="display: none;"/>
+                    
+                    <!-- Left arm -->
+                    <line id="leftarm" x1="150" y1="110" x2="120" y2="130" stroke="black" stroke-width="3" style="display: none;"/>
+                    
+                    <!-- Right arm -->
+                    <line id="rightarm" x1="150" y1="110" x2="180" y2="130" stroke="black" stroke-width="3" style="display: none;"/>
+                    
+                    <!-- Left leg -->
+                    <line id="leftleg" x1="150" y1="150" x2="120" y2="190" stroke="black" stroke-width="3" style="display: none;"/>
+                    
+                    <!-- Right leg -->
+                    <line id="rightleg" x1="150" y1="150" x2="180" y2="190" stroke="black" stroke-width="3" style="display: none;"/>
+                </svg>
+            </div>
+            
+            <div class="game-info">
+                <div class="word-display" id="wordDisplay"></div>
+                
+                <div class="guess-info">
+                    <p>Wrong guesses: <span id="wrongCount">0</span>/6</p>
+                    <p>Guessed letters: <span id="guessedLetters"></span></p>
+                    <p>Guessed words: <span id="guessedWords"></span></p>
+                </div>
+                
+                <div class="input-area">
+                    <input type="text" id="guessInput" placeholder="Enter a letter or word" maxlength="20">
+                    <button id="guessButton" onclick="makeGuess()">Guess</button>
+                    <button id="newGameButton" onclick="newGame()">New Game</button>
+                </div>
+                
+                <div id="message" class="message"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/game.js"></script>
+</body>
+</html>
