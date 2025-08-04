@@ -5,7 +5,7 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] --------------------------< com.pete:hangman >--------------------------
-[INFO] Building Pete's Hangman Game 1.0-SNAPSHOT
+[INFO] Building Vladimir's Hangman Game 1.0-SNAPSHOT
 [INFO]   from pom.xml
 [INFO] --------------------------------[ war ]---------------------------------
 [INFO] 
@@ -32,7 +32,7 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] Reload Mechanic: automatic
 [INFO] nonBlocking:false
 [INFO] Classes = /Users/bzatrok/play/Pete.Hangman/target/classes
-[INFO] Configuring Jetty for project: Pete's Hangman Game
+[INFO] Configuring Jetty for project: Vladimir's Hangman Game
 [INFO] Context path = /
 [INFO] Tmp directory = /Users/bzatrok/play/Pete.Hangman/target/tmp
 [INFO] Web defaults = org/eclipse/jetty/webapp/webdefault.xml
@@ -44,13 +44,13 @@ WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
 [INFO] DefaultSessionIdManager workerName=node0
 [INFO] No SessionScavenger set, using defaults
 [INFO] node0 Scavenging every 600000ms
-[INFO] Started o.e.j.m.p.JettyWebAppContext@46e190ed{Pete's Hangman Game,/,file:///Users/bzatrok/play/Pete.Hangman/src/main/webapp/,AVAILABLE}{file:///Users/bzatrok/play/Pete.Hangman/src/main/webapp/}
+[INFO] Started o.e.j.m.p.JettyWebAppContext@46e190ed{Vladimir's Hangman Game,/,file:///Users/bzatrok/play/Pete.Hangman/src/main/webapp/,AVAILABLE}{file:///Users/bzatrok/play/Pete.Hangman/src/main/webapp/}
 [INFO] Started ServerConnector@78c262ba{HTTP/1.1, (http/1.1)}{0.0.0.0:8090}
 [INFO] Started @1055ms
 [INFO] Started Jetty Server
 [INFO] Stopped ServerConnector@78c262ba{HTTP/1.1, (http/1.1)}{0.0.0.0:8090}
 [INFO] node0 Stopped scavenging
-[INFO] Stopped o.e.j.m.p.JettyWebAppContext@46e190ed{Pete's Hangman Game,/,file:///Users/bzatrok/play/Pete.Hangman/src/main/webapp/,STOPPED}{file:///Users/bzatrok/play/Pete.Hangman/src/main/webapp/}
+[INFO] Stopped o.e.j.m.p.JettyWebAppContext@46e190ed{Vladimir's Hangman Game,/,file:///Users/bzatrok/play/Pete.Hangman/src/main/webapp/,STOPPED}{file:///Users/bzatrok/play/Pete.Hangman/src/main/webapp/}
 [INFO] Jetty server exiting.
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS

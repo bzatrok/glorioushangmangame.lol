@@ -1,4 +1,4 @@
-# Pete's Beer Hangman Game
+# Vladimir's Beer Hangman Game
 
 A web-based Hangman game built with Java servlets and vanilla JavaScript, featuring beer types as the word list.
 

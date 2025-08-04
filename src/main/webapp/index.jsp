@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>VLADIMIR'S BEER HANGMAN GAME - SOVIET STYLE</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E☭%3C/text%3E%3C/svg%3E">
     <link rel="stylesheet" href="css/retro.css?t=<%=System.currentTimeMillis()%>">
     
     <!-- 100% privacy-first analytics -->
