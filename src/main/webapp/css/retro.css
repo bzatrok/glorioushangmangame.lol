@@ -3,6 +3,7 @@
 * {
     cursor: auto;
     box-sizing: border-box;
+    touch-action: manipulation; /* Disable double-tap zoom */
 }
 
 html {

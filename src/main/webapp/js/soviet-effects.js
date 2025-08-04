@@ -297,24 +297,26 @@ document.addEventListener('DOMContentLoaded', function() {
         anthemControl.style.right = isMobileNow ? '10px' : '20px';
     });
     
-    // Auto-start anthem immediately on page load
-    setTimeout(() => {
-        toggleAnthem().catch(() => {
-            console.log('Auto-start blocked by browser - trying after user interaction');
-            
-            // Fallback: wait for any user interaction
-            const enableAutoStart = () => {
-                if (!anthemEnabled) {
-                    toggleAnthem().catch(() => {
-                        console.log('Auto-start failed - user needs to manually enable');
-                    });
-                }
-            };
-            
-            // Listen for any user interaction
-            document.addEventListener('click', enableAutoStart, { once: true });
-            document.addEventListener('keydown', enableAutoStart, { once: true });
-            document.addEventListener('touchstart', enableAutoStart, { once: true });
-        });
-    }, 500); // Small delay to let page fully load
+    // Auto-start anthem after page is fully loaded
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            toggleAnthem().catch(() => {
+                console.log('Auto-start blocked by browser - trying after user interaction');
+                
+                // Fallback: wait for any user interaction
+                const enableAutoStart = () => {
+                    if (!anthemEnabled) {
+                        toggleAnthem().catch(() => {
+                            console.log('Auto-start failed - user needs to manually enable');
+                        });
+                    }
+                };
+                
+                // Listen for any user interaction
+                document.addEventListener('click', enableAutoStart, { once: true });
+                document.addEventListener('keydown', enableAutoStart, { once: true });
+                document.addEventListener('touchstart', enableAutoStart, { once: true });
+            });
+        }, 2000); // Wait 2 seconds after page fully loads
+    });
 });
