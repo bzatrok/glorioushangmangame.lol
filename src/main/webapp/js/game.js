@@ -30,12 +30,12 @@ async function makeGuess() {
     const guess = guessInput.value.trim().toUpperCase();
     
     if (!guess) {
-        showMessage('Please enter a letter or word', 'info');
+        showMessage('☭ ВВЕДИ БУКВУ ИЛИ СЛОВО ТОВАРИЩ! ☭', 'info');
         return;
     }
     
     if (currentGameState && currentGameState.gameOver) {
-        showMessage('Game is over! Start a new game.', 'info');
+        showMessage('☭ ИГРА ОКОНЧЕНА! НАЧНИ НОВУЮ ИГРУ ДЛЯ РОДИНЫ! ☭', 'info');
         return;
     }
     
@@ -56,9 +56,19 @@ async function makeGuess() {
         updateGameDisplay(data.gameState);
         
         if (data.correct) {
-            showMessage(`Good guess! "${data.guess}" is ${data.type === 'letter' ? 'in the word' : 'correct'}!`, 'success');
+            const successMessages = [
+                `☭ ОТЛИЧНО ТОВАРИЩ! "${data.guess}" ПРАВИЛЬНО! ☭`,
+                `☭ СЛАВА! "${data.guess}" В СЛОВЕ! ДЛЯ РОДИНЫ! ☭`,
+                `☭ ХОРОШО! "${data.guess}" УГАДАНО! ВОДКА ДЛЯ ВСЕХ! ☭`
+            ];
+            showMessage(successMessages[Math.floor(Math.random() * successMessages.length)], 'success');
         } else {
-            showMessage(`Sorry! "${data.guess}" is ${data.type === 'letter' ? 'not in the word' : 'incorrect'}.`, 'error');
+            const errorMessages = [
+                `☭ НЕТ ТОВАРИЩ! "${data.guess}" НЕПРАВИЛЬНО! В ГУЛАГ! ☭`,
+                `☭ ПЛОХО! "${data.guess}" НЕ В СЛОВЕ! БОЛЬШЕ ВОДКИ! ☭`,
+                `☭ КАПИТАЛИСТИЧЕСКАЯ ОШИБКА! "${data.guess}" НЕТ! ☭`
+            ];
+            showMessage(errorMessages[Math.floor(Math.random() * errorMessages.length)], 'error');
         }
         
         guessInput.value = '';
@@ -107,9 +117,19 @@ function updateHangmanDrawing(wrongGuesses) {
 
 function handleGameOver(gameState) {
     if (gameState.won) {
-        showMessage(`Congratulations! You won! The word was "${gameState.secretWord}".`, 'success');
+        const winMessages = [
+            `☭ ПОБЕДА ТОВАРИЩ! СЛОВО БЫЛО "${gameState.secretWord}"! СЛАВА КОММУНИЗМУ! ☭`,
+            `☭ ОТЛИЧНО! ТЫ ВЫИГРАЛ! "${gameState.secretWord}" - ДЛЯ РОДИНЫ! ☭`,
+            `☭ ВЕЛИКАЯ ПОБЕДА! "${gameState.secretWord}" УГАДАНО! ВОДКА И ИКРА! ☭`
+        ];
+        showMessage(winMessages[Math.floor(Math.random() * winMessages.length)], 'success');
     } else {
-        showMessage(`Game Over! The word was "${gameState.secretWord}".`, 'error');
+        const loseMessages = [
+            `☭ ПОРАЖЕНИЕ ТОВАРИЩ! СЛОВО БЫЛО "${gameState.secretWord}"! В СИБИРЬ НА ПЕРЕВОСПИТАНИЕ! ☭`,
+            `☭ КАПИТАЛИСТИЧЕСКИЙ ПРОВАЛ! "${gameState.secretWord}" НЕ УГАДАНО! БОЛЬШЕ ТРЕНИРОВКИ! ☭`,
+            `☭ НЕТ ПОБЕДЫ! СЛОВО "${gameState.secretWord}"! КГБ НАБЛЮДАЕТ! ☭`
+        ];
+        showMessage(loseMessages[Math.floor(Math.random() * loseMessages.length)], 'error');
     }
 }
 

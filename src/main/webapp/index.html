@@ -3,12 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pete's Beer Hangman Game</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>ПЁТР'S ПИВО ВИСЕЛИЦА GAME - СОВЕТСКИЙ СТИЛЬ</title>
+    <link rel="stylesheet" href="css/retro.css">
 </head>
 <body>
+    <!-- Soviet Loading Screen -->
+    <div id="soviet-loader" class="loading-gif">
+        <div style="color: #FF0000; font-size: 24px; text-align: center;">
+            ☭ ЗАГРУЗКА ТОВАРИЩ... ☭<br>
+            <div style="background: #FF0000; height: 20px; width: 0%; animation: load-bar 3s linear forwards;"></div>
+        </div>
+    </div>
+    
+    <!-- Under Construction Banner -->
+    <div class="under-construction">
+        🚧 ПОД СТРОИТЕЛЬСТВОМ ТОВАРИЩ! РАБОТАЕТ В КАПИТАЛИСТИЧЕСКИЙ БРАУЗЕР! 🚧
+    </div>
+    
+    <!-- Visitor Counter -->
+    <div class="visitor-counter">
+        ТОВАРИЩИ ПОСЕТИЛИ: <span id="visitorCount">00001337</span> 
+        ☭ СЛАВА СОВЕТСКОМУ СОЮЗУ! ☭
+    </div>
+    
+    <!-- Scrolling Marquee -->
+    <div class="marquee-container">
+        <div class="marquee">
+            ☭ ДОБРО ПОЖАЛОВАТЬ В СОВЕТСКАЯ ВИСЕЛИЦА ТОВАРИЩ! ☭ 
+            ИГРАТЬ В ПИВО ИГРА ДЛЯ СЛАВЫ РОДИНЫ! ☭ 
+            НЕТ КАПИТАЛИЗМ ЗДЕСЬ! ☭ 
+            ТОЛЬКО ВОДКА И КОММУНИЗМ! ☭
+        </div>
+    </div>
+    
     <div class="container">
-        <h1>Beer Type Hangman</h1>
+        <h1>☭ ПИВО ВИСЕЛИЦА ТОВАРИЩ ☭</h1>
         
         <div class="game-area">
             <div class="hangman-container">
@@ -44,15 +73,15 @@
                 <div class="word-display" id="wordDisplay"></div>
                 
                 <div class="guess-info">
-                    <p>Wrong guesses: <span id="wrongCount">0</span>/6</p>
-                    <p>Guessed letters: <span id="guessedLetters"></span></p>
-                    <p>Guessed words: <span id="guessedWords"></span></p>
+                    <p>☭ НЕПРАВИЛЬНЫЕ ПОПЫТКИ: <span id="wrongCount">0</span>/6 ☭</p>
+                    <p>☭ БУКВЫ ТОВАРИЩА: <span id="guessedLetters"></span></p>
+                    <p>☭ СЛОВА ТОВАРИЩА: <span id="guessedWords"></span></p>
                 </div>
                 
                 <div class="input-area">
-                    <input type="text" id="guessInput" placeholder="Enter a letter or word" maxlength="20">
-                    <button id="guessButton" onclick="makeGuess()">Guess</button>
-                    <button id="newGameButton" onclick="newGame()">New Game</button>
+                    <input type="text" id="guessInput" placeholder="БУКВА ИЛИ СЛОВО ТОВАРИЩ" maxlength="20">
+                    <button id="guessButton" onclick="makeGuess()">☭ УГАДАТЬ ☭</button>
+                    <button id="newGameButton" onclick="newGame()">☭ НОВАЯ ИГРА ☭</button>
                 </div>
                 
                 <div id="message" class="message"></div>
@@ -60,6 +89,19 @@
         </div>
     </div>
     
+    <!-- Dancing Stripper in Bottom Right -->
+    <div class="stripper-corner">
+        <img id="stripperGif" src="data:image/gif;base64,R0lGODlhFAAUAPQAAP///8zMzJmZmWZmZjMzMwAAAP/M///MzP/Mmf/MZv/MM//MAP+Z//+ZzP+Zmf+ZZv+ZM/+ZAP9m//9mzP9mmf9mZv9mM/9mAP8z//8zzP8zmf8zZv8zM/8zAP8A//8AzP8Amf8AZv8AM/8AAMz//8z/zMz/mcz/Zsz/M8z/AMzM/8zMzMzMmczMZszMM8zMAMyZ/8yZzMyZmcyZZsyZM8yZAMxm/8xmzMxmmcxmZsxmM8xmAMwz/8wzzMwzmcwzZswzM8wzAMwA/8wAzMwAmcwAZswAM8wAAJn//5n/zJn/mZn/Zpn/M5n/AJnM/5nMzJnMmZnMZpnMM5nMAJmZ/5mZzJmZmZmZZpmZM5mZAJlm/5lmzJlmmZlmZplmM5lmAJkz/5kzzJkzmZkzZpkzM5kzAJkA/5kAzJkAmZkAZpkAM5kAAGb//2b/zGb/mWb/Zmb/M2b/AGbM/2bMzGbMmWbMZmbMM2bMAGaZ/2aZzGaZmWaZZmaZM2aZAGZm/2ZmzGZmmWZmZgAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQEBwAAACwAAAAAFAAUAAAFZiAgjmRpnmiqrmzrvnAsz3Rt33iu73zv/8CgcEgsGo/IpHLJbDqf0Kh0Sq1ar9isdsvter/gsHhMLpvP6LR6zW673/C4fE6v2+/4vH7P7/v/gIGCg4SFhoeIiYqLjI2Oj5CRkpOSIQA7" alt="💃">
+        <div class="stripper-text">СЕКСУАЛЬНАЯ ТОВАРИЩ 💋</div>
+    </div>
+    
+    <!-- Soviet Flag Corner -->
+    <div class="soviet-flag">🚩</div>
+    
+    <!-- Sparkles effect -->
+    <div class="sparkles" id="sparkles"></div>
+    
     <script src="js/game.js"></script>
+    <script src="js/soviet-effects.js"></script>
 </body>
 </html>
