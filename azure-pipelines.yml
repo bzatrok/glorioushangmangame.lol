@@ -1,0 +1,90 @@
+# Azure DevOps Pipeline for Soviet Hangman Game
+# Builds Docker image and pushes to Docker Hub
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  dockerRegistryServiceConnection: 'dockerhub-connection'
+  imageRepository: 'amberglass/hangman'
+  containerRegistry: 'docker.io'
+  dockerfilePath: 'Dockerfile'
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: 'Build and Push Docker Image'
+  jobs:
+  - job: Build
+    displayName: 'Build Soviet Hangman'
+    steps:
+    - task: Maven@3
+      displayName: 'Maven Test'
+      inputs:
+        mavenPomFile: 'pom.xml'
+        goals: 'clean test'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
+
+    - task: Docker@2
+      displayName: 'Build Docker Image'
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'build'
+        Dockerfile: '$(dockerfilePath)'
+        tags: |
+          $(tag)
+          latest
+
+    - task: Docker@2
+      displayName: 'Push Docker Image'
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'push'
+        tags: |
+          $(tag)
+          latest
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Deployment Scripts'
+      inputs:
+        PathtoPublish: 'deploy/'
+        ArtifactName: 'deployment-scripts'
+        publishLocation: 'Container'
+
+- stage: Deploy
+  displayName: 'Deploy to Production'
+  dependsOn: Build
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  jobs:
+  - deployment: DeployToProduction
+    displayName: 'Deploy Soviet Hangman to Production'
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: SSH@0
+            displayName: 'Deploy to Production Server'
+            inputs:
+              sshEndpoint: 'production-server'
+              runOptions: 'commands'
+              commands: |
+                echo "☭ DEPLOYING SOVIET HANGMAN TO PRODUCTION ☭"
+                cd /var/www/hangman.amberglass.co
+                docker pull $(containerRegistry)/$(imageRepository):$(tag)
+                docker stop hangman-game || true
+                docker rm hangman-game || true
+                docker run -d --name hangman-game -p 7583:7583 --restart unless-stopped $(containerRegistry)/$(imageRepository):$(tag)
+                echo "☭ DEPLOYMENT COMPLETE COMRADE! ☭"

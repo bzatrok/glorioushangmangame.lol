@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  hangman-game:
+    image: amberglass/hangman:latest
+    container_name: hangman-game
+    ports:
+      - "7583:7583"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7583/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    environment:
+      - JAVA_OPTS=-Xmx512m -Xms256m
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hangman.rule=Host(`hangman.amberglass.co`)"
+      - "traefik.http.routers.hangman.entrypoints=web"
+      - "traefik.http.services.hangman.loadbalancer.server.port=7583"
