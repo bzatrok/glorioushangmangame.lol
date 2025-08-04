@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>VLADIMIR'S BEER HANGMAN GAME - SOVIET STYLE</title>
-    <link rel="stylesheet" href="css/retro.css">
+    <link rel="stylesheet" href="css/retro.css?t=<%=System.currentTimeMillis()%>">
     
     <!-- 100% privacy-first analytics -->
     <script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
@@ -113,7 +113,7 @@
     <!-- Sparkles effect -->
     <div class="sparkles" id="sparkles"></div>
     
-    <script src="js/game.js"></script>
-    <script src="js/soviet-effects.js"></script>
+    <script src="js/game.js?t=<%=System.currentTimeMillis()%>"></script>
+    <script src="js/soviet-effects.js?t=<%=System.currentTimeMillis()%>"></script>
 </body>
 </html>

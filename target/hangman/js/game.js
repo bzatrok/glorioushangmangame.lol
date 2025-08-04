@@ -30,12 +30,12 @@ async function makeGuess() {
     const guess = guessInput.value.trim().toUpperCase();
     
     if (!guess) {
-        showMessage('☭ ВВЕДИ БУКВУ ИЛИ СЛОВО ТОВАРИЩ! ☭', 'info');
+        showMessage('☭ ENTER LETTER OR WORD COMRADE! ☭', 'info');
         return;
     }
     
     if (currentGameState && currentGameState.gameOver) {
-        showMessage('☭ ИГРА ОКОНЧЕНА! НАЧНИ НОВУЮ ИГРУ ДЛЯ РОДИНЫ! ☭', 'info');
+        showMessage('☭ GAME OVER! START NEW GAME FOR MOTHERLAND! ☭', 'info');
         return;
     }
     
@@ -57,16 +57,16 @@ async function makeGuess() {
         
         if (data.correct) {
             const successMessages = [
-                `☭ ОТЛИЧНО ТОВАРИЩ! "${data.guess}" ПРАВИЛЬНО! ☭`,
-                `☭ СЛАВА! "${data.guess}" В СЛОВЕ! ДЛЯ РОДИНЫ! ☭`,
-                `☭ ХОРОШО! "${data.guess}" УГАДАНО! ВОДКА ДЛЯ ВСЕХ! ☭`
+                `☭ EXCELLENT COMRADE! "${data.guess}" CORRECT! ☭`,
+                `☭ GLORY! "${data.guess}" IN WORD! FOR MOTHERLAND! ☭`,
+                `☭ GOOD! "${data.guess}" GUESSED! VODKA FOR ALL! ☭`
             ];
             showMessage(successMessages[Math.floor(Math.random() * successMessages.length)], 'success');
         } else {
             const errorMessages = [
-                `☭ НЕТ ТОВАРИЩ! "${data.guess}" НЕПРАВИЛЬНО! В ГУЛАГ! ☭`,
-                `☭ ПЛОХО! "${data.guess}" НЕ В СЛОВЕ! БОЛЬШЕ ВОДКИ! ☭`,
-                `☭ КАПИТАЛИСТИЧЕСКАЯ ОШИБКА! "${data.guess}" НЕТ! ☭`
+                `☭ NO COMRADE! "${data.guess}" IS WRONG! TO GULAG! ☭`,
+                `☭ BAD! "${data.guess}" NOT IN WORD! MORE VODKA! ☭`,
+                `☭ CAPITALIST ERROR! "${data.guess}" NO! ☭`
             ];
             showMessage(errorMessages[Math.floor(Math.random() * errorMessages.length)], 'error');
         }
@@ -118,18 +118,19 @@ function updateHangmanDrawing(wrongGuesses) {
 function handleGameOver(gameState) {
     if (gameState.won) {
         const winMessages = [
-            `☭ ПОБЕДА ТОВАРИЩ! СЛОВО БЫЛО "${gameState.secretWord}"! СЛАВА КОММУНИЗМУ! ☭`,
-            `☭ ОТЛИЧНО! ТЫ ВЫИГРАЛ! "${gameState.secretWord}" - ДЛЯ РОДИНЫ! ☭`,
-            `☭ ВЕЛИКАЯ ПОБЕДА! "${gameState.secretWord}" УГАДАНО! ВОДКА И ИКРА! ☭`
+            `☭ VICTORY COMRADE! WORD WAS "${gameState.secretWord}"! GLORY TO COMMUNISM! ☭`,
+            `☭ EXCELLENT! YOU WON! "${gameState.secretWord}" - FOR MOTHERLAND! ☭`,
+            `☭ GREAT VICTORY! "${gameState.secretWord}" GUESSED! VODKA AND CAVIAR! ☭`
         ];
         showMessage(winMessages[Math.floor(Math.random() * winMessages.length)], 'success');
     } else {
         const loseMessages = [
-            `☭ ПОРАЖЕНИЕ ТОВАРИЩ! СЛОВО БЫЛО "${gameState.secretWord}"! В СИБИРЬ НА ПЕРЕВОСПИТАНИЕ! ☭`,
-            `☭ КАПИТАЛИСТИЧЕСКИЙ ПРОВАЛ! "${gameState.secretWord}" НЕ УГАДАНО! БОЛЬШЕ ТРЕНИРОВКИ! ☭`,
-            `☭ НЕТ ПОБЕДЫ! СЛОВО "${gameState.secretWord}"! КГБ НАБЛЮДАЕТ! ☭`
+            `☭ DEFEAT COMRADE! WORD WAS "${gameState.secretWord}"! TO SIBERIA FOR RE-EDUCATION! ☭`,
+            `☭ CAPITALIST FAILURE! "${gameState.secretWord}" NOT GUESSED! MORE TRAINING! ☭`,
+            `☭ NO VICTORY! WORD "${gameState.secretWord}"! KGB IS WATCHING! ☭`
         ];
         showMessage(loseMessages[Math.floor(Math.random() * loseMessages.length)], 'error');
+        showStalinImage();
     }
 }
 
@@ -145,6 +146,75 @@ function clearMessage() {
     messageDiv.textContent = '';
     messageDiv.className = 'message';
     messageDiv.style.display = 'none';
+}
+
+function showStalinImage() {
+    // Create Stalin overlay
+    const stalinOverlay = document.createElement('div');
+    stalinOverlay.id = 'stalin-overlay';
+    stalinOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(204, 0, 0, 0.95);
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        animation: stalin-appear 1s ease-in;
+    `;
+    
+    // Add Stalin image
+    const stalinImg = document.createElement('img');
+    stalinImg.src = 'https://preview.redd.it/hum32lholr341.jpg?width=640&crop=smart&auto=webp&s=97a275ae502f69b36d207f9d60f9448975f43819';
+    stalinImg.style.cssText = `
+        max-width: 90%;
+        max-height: 70%;
+        border: 5px solid #FFD700;
+        border-radius: 10px;
+        box-shadow: 0 0 30px #FFD700;
+        animation: stalin-pulse 2s infinite;
+    `;
+    stalinImg.alt = 'Disappointed Stalin';
+    
+    // Add text
+    const stalinText = document.createElement('div');
+    stalinText.innerHTML = `
+        <div style="color: #FFD700; font-size: 36px; font-weight: bold; text-align: center; margin-top: 20px; text-shadow: 2px 2px 0px #CC0000; font-family: 'Ruslan Display', 'Arial Black', serif;">
+            ☭ STALIN IS DISAPPOINTED ☭<br>
+            <span style="font-size: 24px;">Click to continue...</span>
+        </div>
+    `;
+    
+    stalinOverlay.appendChild(stalinImg);
+    stalinOverlay.appendChild(stalinText);
+    
+    // Add click handler to close
+    stalinOverlay.addEventListener('click', () => {
+        stalinOverlay.remove();
+    });
+    
+    // Add CSS animation keyframes
+    if (!document.querySelector('#stalin-animations')) {
+        const style = document.createElement('style');
+        style.id = 'stalin-animations';
+        style.textContent = `
+            @keyframes stalin-appear {
+                from { opacity: 0; transform: scale(0.5); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            @keyframes stalin-pulse {
+                0%, 100% { transform: scale(1); filter: brightness(1); }
+                50% { transform: scale(1.05); filter: brightness(1.2); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    document.body.appendChild(stalinOverlay);
 }
 
 document.getElementById('guessInput').addEventListener('keypress', function(event) {
