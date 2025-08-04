@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  hangman:
+    image: amberglass/hangman:v2.2
+    container_name: hangman-game
+    ports:
+      - "7583:8080"
+    restart: unless-stopped
+    environment:
+      - JAVA_OPTS=-Xmx512m
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/game/state"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
