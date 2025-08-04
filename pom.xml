@@ -55,6 +55,9 @@
                 <version>9.4.51.v20230217</version>
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <httpConnector>
+                        <port>8090</port>
+                    </httpConnector>
                     <webApp>
                         <contextPath>/</contextPath>
                     </webApp>
