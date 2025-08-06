@@ -115,6 +115,11 @@
     <!-- Sparkles effect -->
     <div class="sparkles" id="sparkles"></div>
     
+    <!-- Buy Me a Coffee Button -->
+    <div style="position: fixed; bottom: 20px; left: 20px; z-index: 1000;">
+        <a href="https://www.buymeacoffee.com/bzatrok" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+    </div>
+    
     <script src="js/game.js?t=<%=System.currentTimeMillis()%>"></script>
     <script src="js/soviet-effects.js?t=<%=System.currentTimeMillis()%>"></script>
 </body>
